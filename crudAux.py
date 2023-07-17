@@ -21,7 +21,8 @@ miSueldoBasico=StringVar()
 miDescripción=StringVar()
 
 def conexionBBDD():
-    miConexion=sqlite3.connect("Nomina.db")
+    rutaBd="C:/Users/FACS/Desktop/Escuela Python/MyCode/proyectoNomina/crudNomina/Nomina.db"
+    miConexion=sqlite3.connect(rutaBd)
     miCursor=miConexion.cursor()
 
     try:
@@ -59,10 +60,14 @@ def salirAplicacion():
         root.destroy()
 
 def limpiarCampos():
-    miId.set("")
-    miNombre.set("")
-    miCargo.set("")
-    miSueldoBasico.set("")
+    miCedula.set(" ")
+    miApellido.set(" ")
+    miNombre.set(" ")
+    miFechaNacimiento.set(" ")
+    miFechadeIngreso.set(" ")
+    miCargo.set(" ")
+    miSueldoBasico.set(" ")
+    miDescripción.set(" ")
 
 def mensaje():
     acerca="""
@@ -75,11 +80,11 @@ def mensaje():
 ################################ Métodos CRUD ######################
 
 def crear():
-    miConexion=sqlite3.connect("Nomina.db")
+    miConexion=sqlite3.connect("Nomina1.db")
     miCursor=miConexion.cursor()
     try:
         datos=miCedula.get(),miApellido.get(),miNombre.get(),miFechaNacimiento.get(),miFechadeIngreso.get(),miCargo.get(),miSueldoBasico.get()
-        miCursor.execute("INSERT INTO empleado VALUES(NULL,?,?,?,?,?)",(datos))
+        miCursor.execute("INSERT INTO empleado VALUES(NULL,?,?,?,?,?,?,?)",(datos))
         miConexion.commit()
     except:
         messagebox.showwarning("ADVERTENCIA","Ocurrió un error al crear el registro, verifique su conexión a a BBDD")
